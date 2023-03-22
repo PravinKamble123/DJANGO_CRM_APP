@@ -1,0 +1,33 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Clients | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <div class="py-6 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <h1 class="text-3xl font-bold mb-4"></h1>
+        <a href="{% url 'client:add_client' %}" class="inline-block py-3 px-6 bg-teal-600 rounded-lg text-white hover:bg-teal-700 transition-colors duration-200">Add client</a>
+        {% if clients %}
+            <a href="{% url 'client:client_export' %}" class="inline-block py-3 px-6 bg-teal-600 rounded-lg text-white hover:underline">Export</a>
+        {% endif %}
+        {% if clients %}
+            <div class="mt-4 grid grid-cols-3 gap-4">
+                {% for client in clients %}
+                    <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                        <div class="px-6 py-4">
+                            <div class="font-bold text-xl mb-2">
+                                <a href="{% url 'client:client_detail' client.id %}" class="hover:underline">{{ client.name }}</a>
+                            </div>
+                            <p class="text-gray-700 text-base">{{ client.description }}</p>
+                        </div>
+                        <div class="px-6 py-4">
+                            <p class="text-gray-700 text-base">{{ client.email }}</p>
+                            <p class="text-gray-700 text-base">{{ client.created_on|date:'F j, Y' }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="mt-6 px-4">There are no clients yet...</p>
+        {% endif%}
+    </div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Leads | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <div class="py-6 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <h1 class="text-3xl font-bold mb-4">Leads</h1>
+        <a href="{% url 'lead:add_lead' %}" class="inline-block py-3 px-6 bg-teal-600 rounded-lg text-white hover:bg-teal-700 transition-colors duration-200">Add lead</a>
+        {% if leads %}
+            <div class="mt-6 grid grid-cols-3 gap-4 bg-gray-500 rounded-t-lg text-white font-semibold">
+                <div class="py-4 px-6">Name</div>
+                <div class="py-4 px-6">Priority</div>
+                <div class="py-4 px-6">Status</div>
+            </div>
+            <p class="text-sm">Total leads: {{ team.leads.all|length }}</p>
+            {% for lead in leads %}
+                <div class="flex flex-col sm:flex-row justify-between items-center py-4 border-b border-gray-300">
+                    <div class="flex items-center justify-between sm:w-3/5 md:w-2/5 py-2 sm:border-r sm:pr-6">
+                        <div class="font-semibold text-gray-800">
+                            <a href="{% url 'lead:lead_detail' lead.id %}" class="hover:underline">{{ lead.name }}</a>
+                        </div>
+                        <div class="text-gray-500 text-sm ml-2">{{ lead.created_on|date:'F j, Y' }}</div>
+                    </div>
+                    <div class="w-full sm:w-1/5 md:w-2/5 py-2 sm:border-r sm:px-6">{{ lead.get_priority_display }}</div>
+                    <div class="w-full sm:w-1/5 md:w-1/5 py-2 sm:px-6">{{ lead.get_status_display }}</div>
+                </div>
+            {% endfor %}
+        {% else %}
+                <P class="mt-6 px-4">There are no leads yet...</P>
+        {% endif%}
+    </div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% load static %}
+<footer class="py-8 text-center bg-sky-200">
+  <div class="container mx-auto px-4 py-6">
+      
+      <nav class="flex flex-wrap justify-center">
+          <a href="/" class="px-4 py-2 hover:text-gray-400">Home</a>
+          <a href="{% url 'core:about' %}" class="px-4 py-2 hover:text-gray-400">About Us</a>
+          <a href="#" class="px-4 py-2 hover:text-gray-400">Services</a>
+          <a href="#" class="px-4 py-2 hover:text-gray-400">Blog</a>
+          <a href="#" class="px-4 py-2 hover:text-gray-400">Contact Us</a>
+      </nav>
+  </div>
+  <img src="{% static 'img/logo.jpg' %}" alt="Your Company Logo" class="h-8 mx-auto" />
+  <p class="text-xs text-gray-700 pt-4">© 2023 Pravin Kamble. All rights reserved.</p>
+</footer>

@@ -1,0 +1,49 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Lead | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <div class="py-6 px-6 bg-gray-100">
+        <h1 class="text-2xl font-bold mb-4">Add Lead</h1>
+        
+        {% if team.plan.max_leads|length >= team.leads.all|length %}
+            Num leads: {{ team.leads.all|length }}
+
+            <form method="post" action="." class="max-w-lg mx-auto bg-white rounded-lg shadow-lg p-6">
+                {% csrf_token %}
+
+                <div class="mb-4">
+                    <label for="name" class="block text-gray-700 font-bold mb-2">Name</label>
+                    {{ form.name }}
+                </div>
+
+                <div class="mb-4">
+                    <label for="email" class="block text-gray-700 font-bold mb-2">Email</label>
+                    {{ form.email }}
+                </div>
+
+                <div class="mb-4">
+                    <label for="phone" class="block text-gray-700 font-bold mb-2">Description</label>
+                    {{ form.description }}
+                </div>
+
+                <div class="mb-4">
+                    <label for="message" class="block text-gray-700 font-bold mb-2">Priority</label>
+                    {{ form.priority }}
+                </div>
+                <div class="mb-4">
+                    <label for="message" class="block text-gray-700 font-bold mb-2">Status</label>
+                    {{ form.status }}
+                </div>
+
+                <div class="flex justify-center">
+                    <button class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded">
+                        Submit
+                    </button>
+                </div>
+            </form>
+        {% else %}
+            <p>Oops! You have reached your limit.</p>
+        {% endif %}
+    </div>
+{% endblock %}

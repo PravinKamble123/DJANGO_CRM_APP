@@ -1,0 +1,14 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Delete | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <h1 class="mb-6 mt-6 text-xs">You have successfully deleted the lead</h1>
+    <a href="{% url 'lead:get_the_leads' %}" class="inline-flex items-center text-blue-600 hover:text-blue-800 hover:border-blue-600 hover:bg-blue-100 border rounded-md px-3 py-2 transition duration-300 ease-in-out">
+        <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        Go to leads...
+    </a>
+
+    
+    
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'core/base.html' %}
+{% load socialaccount %}
+
+{% block title %}Log in |{{ block.super }}{% endblock %}
+
+{% block content %}
+    <div class="flex justify-center items-center h-screen">
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h1 class="text-2xl font-bold mb-4">Log in</h1>
+            <form method="post" action="{% url 'user:login' %}">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-bold mb-2" for="username">
+                        Username
+                    </label>
+                    <input type="text" name="username" id="username" class="block w-full p-2 border rounded" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-bold mb-2" for="password">
+                        Password
+                    </label>
+                    <input type="password" name="password" id="password" class="block w-full p-2 border rounded" required>
+                </div>
+                <div class="mb-4">
+                    <a href="{% provider_login_url 'google' %}" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                        Sign in with Google
+                    </a>
+                </div>
+                <div class="flex justify-center">
+                    <button class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded">
+                        Log in
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

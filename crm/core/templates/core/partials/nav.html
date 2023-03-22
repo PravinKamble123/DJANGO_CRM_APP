@@ -1,0 +1,21 @@
+<nav class="py-6 px-6 flex justify-between bg-gray-800">
+    <a href="/" class="text-white font-bold text-2xl tracking-wide">CRM</a>
+
+    <div class="space-x-4">
+        {% if request.user.is_authenticated %}
+            {% if team %}
+                <a href="{% url 'team:detail' active_team.id %}" class="text-white">{{ active_team.name }}</a>
+            {% endif %}
+            <a href="{% url 'dashboard:dashboard' %}" class="py-2 px-4 bg-teal-600 rounded-lg text-white font-medium hover:bg-teal-700 transition duration-300">Dashboard</a>
+            <a href="{% url 'client:client_list' %}" class="py-2 px-4 bg-teal-600 rounded-lg text-white font-medium hover:bg-teal-700 transition duration-300">Clients</a>
+            <a href="{% url 'lead:lead_list' %}" class="py-2 px-4 bg-teal-600 rounded-lg text-white font-medium hover:bg-teal-700 transition duration-300">Leads</a>
+            <a href="{% url 'user:my_account' %}" class="py-2 px-4 bg-pink-600 rounded-lg text-white font-medium hover:bg-pink-700 transition duration-300">My Account</a>
+            
+        {% else %}
+            <a href="{% url 'user:login' %}" class="py-2 px-4 bg-teal-500 rounded-lg text-white font-medium hover:bg-teal-600 transition duration-300">Login</a>
+            <a href="{% url 'user:signup' %}" class="py-2 px-4 bg-teal-300 rounded-lg text-white font-medium hover:bg-teal-400 transition duration-300">Sign up</a>
+        {% endif %}
+        
+    </div>
+
+</nav>
