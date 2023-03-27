@@ -2,11 +2,11 @@ from .models import Team
 
 def active_team(request):
     if request.user.is_authenticated:
-        active_team= Team.objects.filter(created_by=request.user)
-        if active_team.exists():
-            active_team = active_team.first()
+        if request.user.userprofile.active_team:
+            active_team=request.user.userprofile.active_team
         else:
-            active_team = None
+            active_team= Team.objects.filter(created_by=request.user)[0]
     else:
-        active_team = None
+        active_team=None
+
     return {'active_team':active_team}

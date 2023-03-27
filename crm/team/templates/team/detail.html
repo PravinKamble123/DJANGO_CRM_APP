@@ -3,18 +3,30 @@
 {% block title %}{{ team.name }} |{{ block.super }}{% endblock %}
 
 {% block content %}
-<div class="py-6 px-6 bg-gray-100">
-    <h1 class="text-2xl font-bold mb-4">{{ team.name }}</h1>
-    <h2 class="p-2 font-serif text-sm font-medium">Team Owner: {{ team.created_by }}</h1>
+<div class="grid grid-cols-3 gap-6">
+    <div class="col-span-2 py-6 px-6 bg-white shadow rounded-lg">
+        <div class="flex items-center justify-between mb-4">
+            <h1 class="text-3xl font-bold">{{ team.name }}</h1>
+            <a href="{% url 'team:teams_list' %}" class="inline-block py-2 px-4 bg-teal-500 text-white rounded-md hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:ring-offset-2">Switch Team</a>
+        </div>
+        <div class="mb-4">
+            <h2 class="text-lg font-medium text-gray-600">Team Owner</h2>
+            <p class="text-sm text-gray-500">{{ team.created_by }}</p>
+        </div>
         {% if team and team.created_by == request.user %}
-        <a href="{% url 'team:edit_team' team.id %}" class="mb-4 px-2 text-teal-600 hover:text-teal-800 hover:underline mr-4">Edit Team</a>
-    {% endif %}
+        <a href="{% url 'team:edit_team' team.id %}" class="inline-block px-4 py-2 bg-teal-500 text-white rounded-md hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:ring-offset-2">Edit Team</a>
+        {% endif %}
+    </div>
+    <div class="col-span-1 py-6 px-6 bg-white shadow rounded-lg">
+        <h2 class="text-xl font-medium mb-4">Team Members</h2>
+        <ul class="space-y-4">
+            {% for member in team.members.all %}
+            <li class="flex items-center">
+                <img class="w-10 h-10 rounded-full mr-4 object-cover" src="{{ member.profile_image.url }}" alt="{{ member.username }}'s profile picture">
+                <span class="text-gray-800">{{ member.username }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
-<div class="mt-4">
-    <h3 class="text-lg font-medium">Team members</h3>
-    {% for member in team.members.all %}
-        <p>{{ member.username }}</p>
-    {% endfor %}
-</div>
-
 {% endblock %}

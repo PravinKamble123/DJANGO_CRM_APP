@@ -32,7 +32,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 LOGIN_REDIRECT_URL = '/dashboard/'
-LOGIN_URL = 'login'
+LOGIN_URL = 'user:login'
 LOGOUT_REDIRECT_URL = '/'
 
 
@@ -62,7 +62,20 @@ INSTALLED_APPS = [
 
     'allauth.socialaccount.providers.linkedin',
     'allauth.socialaccount.providers.linkedin_oauth2',
+    'tailwind',
+    'theme',
+    'django_browser_reload',
+    'django.contrib.humanize',
 ]
+
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
+NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
+
+TAILWIND_APP_NAME = 'theme'
 
 SITE_ID = 1
 
@@ -92,6 +105,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 ROOT_URLCONF = 'crm.urls'
@@ -171,13 +185,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 
-
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [   
-     BASE_DIR / "static",
-     
-]
+
 
 MEDIA_ROOT  = BASE_DIR /"media"
 MEDIA_URL = 'media/'

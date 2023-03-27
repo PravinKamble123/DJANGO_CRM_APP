@@ -18,18 +18,24 @@ from .models import Userprofile
 
 def signup(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = SignupForm(request.POST)
+
         if form.is_valid():
-            form.save()
-            # log the user in
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=password)
-            login(request, user)
-            return redirect('login')
+            user = form.save()
+            team= Team.objects.create(name='The team name', created_by = user)
+            team.members.add(user)
+            team.save()
+
+            Userprofile.objects.create(user = user, active_team= team)
+            return redirect('user:login')
     else:
-        form = UserCreationForm()
-    return render(request, 'user/signup.html', {'form': form})
+        form = SignupForm()
+
+    
+    return render(request, 'user/signup.html',{
+        'form':form,
+    })
+
 
             
             

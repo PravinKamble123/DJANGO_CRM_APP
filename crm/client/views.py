@@ -8,6 +8,8 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Client
 from team.models import Team
+from .models import Comment
+
 
 
 @login_required
@@ -127,3 +129,12 @@ def add_client(request):
         "team":team
     })
 
+
+
+
+@login_required
+def delete_comment(request, pk):
+    comment = get_object_or_404(Comment, created_by=request.user, pk=pk)
+    client_pk = comment.lead.pk
+    comment.delete()
+    return redirect('client:client_detail', pk=client_pk)

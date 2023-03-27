@@ -1,15 +1,15 @@
-{% load static %}
+{% load static tailwind_tags %}
 
 <!doctype html>
 <html>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="{% static 'main.min.css' %}">
-        <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+        
         <title>
             {% block title %}CRM{% endblock %}
         </title>
+        {% tailwind_css %}
     </head>
     <body>
         {% include 'core/partials/nav.html' %}
@@ -25,22 +25,7 @@
         {% endblock %}
         {% include 'core/partials/footer.html' %}
         
-        <div id="loading-spinner" class="hidden fixed top-0 left-0 w-screen h-screen flex justify-center items-center bg-white z-50">
-            <div class="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-32 w-32"></div>
-          </div>
-          
-          <script>
-            // Show the loading spinner when the page is loading
-            document.onreadystatechange = function() {
-              var spinner = document.getElementById("loading-spinner");
-              if (document.readyState !== "complete") {
-                spinner.classList.remove("hidden");
-              } else {
-                spinner.classList.add("hidden");
-              }
-            };
-          </script>
-          
+        
 
     </body>
 </html>
